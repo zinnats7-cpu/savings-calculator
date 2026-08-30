@@ -13,10 +13,53 @@ The program asks you for your starting amount, how much you add every month, the
 It calculates the balance at the end of every month using compound interest (interest is calculated and added monthly, not just once a year), prints a summary of total money contributed, total interest earned, and the final balance, and saves a line chart (`savings_growth.png`) showing the balance growing over time.
 
 ## Example
+
+```
+=== Compound Interest / Savings Calculator ===
+
+Starting amount ($): 1000
+Monthly contribution ($): 200
+Annual interest rate (%, e.g. 5 for 5%): 7
+Number of years: 10
+
+--- Results after 10 year(s) ---
+Total contributed:  $25,000.00
+Interest earned:    $11,626.62
+Final balance:      $36,626.62
+
+Chart saved to 'savings_growth.png'
+```
+
+## How the math works
+
+Every month, two things happen to your balance: it earns interest based on the current balance, then you add your monthly contribution.
+
+```python
+monthly_rate = annual_rate / 100 / 12
+balance = balance * (1 + monthly_rate) + monthly_contribution
+```
+
+The annual rate gets divided by 12 to turn it into a monthly rate, and divided by 100 to turn a percentage (like `7`) into a decimal (`0.07`). This is repeated once for every month in the time period, which is what creates compound growth, you eventually earn interest on interest you earned in previous months, not just on your original contributions.
+
+## Getting started
+
+Requirements: Python 3.8+ and matplotlib (`pip install matplotlib`)
+
+```bash
+git clone https://github.com/zinnats7-cpu/savings-calculator.git
+cd savings-calculator
+pip install -r requirements.txt
+python savings_calculator.py
+```
+
+## Project structure
+
+```
 savings-calculator/
-├── savings_calculator.py # main program
-├── requirements.txt # dependencies
+├── savings_calculator.py   # main program
+├── requirements.txt        # dependencies
 └── README.md
+```
 
 ## Possible next features
 
